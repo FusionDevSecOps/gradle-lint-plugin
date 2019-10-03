@@ -41,6 +41,11 @@ configurations {
     compile.extendsFrom plugin
 }
 
+jacoco {
+    toolVersion = "0.8.4"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
 dependencies {
     compileOnly 'com.netflix.nebula:gradle-info-plugin:latest.release'
     compile 'com.netflix.nebula:nebula-gradle-interop:latest.release'
@@ -88,6 +93,14 @@ dependencies {
 
 test {
     maxParallelForks = 3
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
 }
 
 pluginBundle {
